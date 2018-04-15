@@ -6,7 +6,7 @@ import os
 import pandas as pd
 
 # Input your own directory for the Excel files you want to convert
-os.chdir("C:\Users\edewi_000\Desktop\Coastal Errosion")
+os.chdir("C:\Your Directory")
 
 names = []
 names2 = []
