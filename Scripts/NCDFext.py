@@ -11,7 +11,7 @@ from netCDF4 import Dataset
 from arcpy import env
 import sys
 
-path = "C:\Users\edewi_000\Desktop\Coastal Errosion"
+path = # Your root project path here
 sys.path.append(path)
 import x_to_csv
 env.workspace = path
