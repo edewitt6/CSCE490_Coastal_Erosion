@@ -11,7 +11,7 @@ from netCDF4 import Dataset
 from arcpy import env
 import sys
 
-path = # Your root project path here
+path = "C:\Users\edewi_000\Desktop\Coastal Errosion"
 sys.path.append(path)
 import x_to_csv
 env.workspace = path
@@ -61,9 +61,10 @@ def net_cdf_extract():
     if main.endswith("Ua"):
         drew.file_type = "uas"
         uas_extract(drew)
-    elif main.endswith("CNRM_hist"):
+    elif main.endswith("SST_CNRM"):
         ij_extract(drew)
     elif main.endswith("GFDL-CM3"):
+        drew = DREW_PNT(1,0)
         r_extract(drew)
     x_to_csv.convert(out_dir)
         
@@ -163,7 +164,7 @@ def r_extract(drew): # Don't know if this works yet as I don't have the files ye
             for j in range(lon.shape[1]):
                 if (lat[i][j] > mlat(drew) and lat[i][j] < plat(drew)) and (lon[i][j] > mlon(drew) and lon[i][j] < plon(drew)):
                         dist_DP = math.sqrt((drew.lon - lon[i][j])**2 + (drew.lat - lat[i][j])**2)
-                        if dist_DP < closest_dist:
+                        if dist_DP < drew.closest_dist:
                             drew.closest_dist = dist_DP
                             drew.closest_i = i
                             drew.closest_j = j

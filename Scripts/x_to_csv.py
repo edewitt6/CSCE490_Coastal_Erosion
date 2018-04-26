@@ -14,12 +14,15 @@ def convert(cur_dir):
     
     # Goes through listed directory and makes lists of all the xls,xlsx files
     for items in os.listdir(os.getcwd()):
-        if items.endswith(".xlsx"):
-            xcel_files.append(items)
-            csv_files.append(items.replace("xlsx","csv"))
-        elif items.endswith(".xls"):
-            xcel_files.append(items)
-            csv_files.append(items.replace("xls","csv"))
+        if os.path.isdir(items) == True:
+            print (items,"Is Directory. PASS")
+        else:
+            if items.endswith(".xlsx"):
+                xcel_files.append(items)
+                csv_files.append(items.replace("xlsx","csv"))
+            elif items.endswith(".xls"):
+                xcel_files.append(items)
+                csv_files.append(items.replace("xls","csv"))
     
     # Creates CSV files using the pandas module
     for i in range(0,xcel_files.__len__()):
