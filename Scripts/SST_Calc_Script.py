@@ -92,16 +92,37 @@ def append_avg_list():
         avg = sum/27
         avg_list.append(avg)
 
-# Not done yet...        
+
+def make_csv(file_name,proj,time_a):
+    with open(file_name, 'wb') as csvfile:
+        writer = csv.DictWriter(csvfile, ['time','tos'],delimiter = ",")
+        writer.writeheader()
+        for i in range(len(proj)):
+            writer.writerow({'time': time_a[i],'tos': proj[i]})
+       
 def add_avg_to_proj():
     # loop through projected data and add the avg diff to each mo
     # then create a composite csv file with new data
-    pass
+    for file in proj_file_list:
+        index = 0
+        new_file = "NEW_" + str(file)
+        new_projection = []
+        time_array = []
+        with open(file, 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                new_projection.append(float(row['tos']) + avg_list[index])
+                time_array.append(row['time'])
+                index += 1
+                if index == 12:
+                    index = 0
+        make_csv(new_file,new_projection,time_array)
 
 append_kelvin_list()
 append_file_list()
 append_diff_list()
 append_avg_list()
+add_avg_to_proj()
 #print kelvin_list
 #print file_list
 #print diff_list
